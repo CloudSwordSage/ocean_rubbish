@@ -39,10 +39,10 @@ classes = []
 with open('./datasets_bak/classes.txt', 'r') as f:
     classes.extend(line.strip() for line in f)
 
+root = os.getcwd()
+
 with open('./datasets/data.yaml', 'w') as f:
-    f.write("train: ./datasets/images/train\n")
-    f.write("val: ./datasets/images/val\n")
+    f.write(f"train: {os.path.join(root, 'datasets/images/train')}\n")
+    f.write(f"val: {os.path.join(root, 'datasets/images/val')}\n")
     f.write(f"nc: {len(classes)}\n")
-    f.write(f"names: |\n")
-    for i in classes:
-        f.write(f"  - {i}\n")
+    f.write(f"names: {json.dumps(classes)}\n")

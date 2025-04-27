@@ -9,6 +9,9 @@ import os
 import json
 import shutil
 
+if os.path.exists("./datasets_bak"):
+    shutil.rmtree("./datasets_bak")
+
 os.makedirs("./datasets_bak/images")
 os.makedirs("./datasets_bak/labels")
 
@@ -37,7 +40,7 @@ for item in data["annotations"]:
     h_norm = h / height
     class_id = item["category_id"]
     with open(f"./datasets_bak/labels/{image_base_name}.txt", "a") as f:
-        f.write(f"{class_id} {x_norm} {y_norm} {w_norm} {h_norm}\n")
+        f.write(f"{class_id - 1} {x_norm} {y_norm} {w_norm} {h_norm}\n")
 
 with open('./datasets_bak/classes.txt', 'w') as f:
     for value in category.values():

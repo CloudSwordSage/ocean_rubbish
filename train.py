@@ -6,13 +6,16 @@
 
 import os
 from ultralytics import YOLO
+import multiprocessing
 
-model_path = './model/yolo8n.pt'
+if __name__ == '__main__':
+    multiprocessing.freeze_support()
+    model_path = 'yolo11s.pt'
 
-model = YOLO(model_path) if os.path.exists(model_path) else YOLO('yolo8n.yaml')
+    model = YOLO(model_path)
 
-model.train(data='./datasets/data.yaml', epochs=100)
+    model.train(data='./datasets/data.yaml', epochs=2)
 
-model.val()
+    model.val()
 
-model.save('yolo8n.pt')
+    model.save('model/yolo11s_last.pt')
