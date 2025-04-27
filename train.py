@@ -6,6 +6,11 @@ import torch
 torch.cuda.empty_cache()
 os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
 
+import torch
+torch.cuda.empty_cache()
+
+os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
+
 if __name__ == '__main__':
     multiprocessing.freeze_support()
     model_path = 'yolo11s.pt'
@@ -13,6 +18,8 @@ if __name__ == '__main__':
     model = YOLO(model_path)
 
     model.train(data='./datasets/data.yaml', epochs=2)
+    torch.cuda.empty_cache()
+
     torch.cuda.empty_cache()
 
     model.val()
