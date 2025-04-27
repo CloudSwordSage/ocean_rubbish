@@ -10,7 +10,7 @@ import json
 import shutil
 import random
 
-os.removedirs("./datasets")
+shutil.rmtree("./datasets")
 
 os.makedirs("./datasets/images/train", exist_ok=True)
 os.makedirs("./datasets/images/val", exist_ok=True)
@@ -33,3 +33,15 @@ for image in val_images:
     shutil.copy(os.path.join("./datasets_bak/labels", image.replace(".jpg", ".txt")), "./datasets/labels/val")
 
 shutil.copy('./datasets_bak/classes.txt', './datasets/')
+
+classes = []
+with open('./datasets_bak/classes.txt', 'r') as f:
+    classes.extend(line.strip() for line in f)
+
+with open('./datasets/data.yaml', 'w') as f:
+    f.write("train: ./datasets/images/train\n")
+    f.write("val: ./datasets/images/val\n")
+    f.write(f"nc: {len(classes)}\n")
+    f.write(f"names: |\n")
+    for i in classes:
+        f.write(f"  - {i}\n")
