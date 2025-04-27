@@ -10,7 +10,8 @@ import json
 import shutil
 import random
 
-shutil.rmtree("./datasets")
+if os.path.exists("./datasets"):
+    shutil.rmtree("./datasets")
 
 os.makedirs("./datasets/images/train", exist_ok=True)
 os.makedirs("./datasets/images/val", exist_ok=True)

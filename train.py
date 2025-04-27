@@ -10,3 +10,9 @@ from ultralytics import YOLO
 model_path = './model/yolo8n.pt'
 
 model = YOLO(model_path) if os.path.exists(model_path) else YOLO('yolo8n.yaml')
+
+model.train(data='./datasets/data.yaml', epochs=100)
+
+model.val()
+
+model.save('yolo8n.pt')
