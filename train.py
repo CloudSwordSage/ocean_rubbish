@@ -1,12 +1,10 @@
-# -*- coding: utf-8 -*-
-# @Time    : 2025/4/27 09:20:57
-# @Author  : 墨烟行(GitHub UserName: CloudSwordSage)
-# @File    : train.py
-# @Desc    :
-
 import os
 from ultralytics import YOLO
 import multiprocessing
+import torch
+
+torch.cuda.empty_cache()
+os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
 
 if __name__ == '__main__':
     multiprocessing.freeze_support()
@@ -15,6 +13,7 @@ if __name__ == '__main__':
     model = YOLO(model_path)
 
     model.train(data='./datasets/data.yaml', epochs=2)
+    torch.cuda.empty_cache()
 
     model.val()
 
