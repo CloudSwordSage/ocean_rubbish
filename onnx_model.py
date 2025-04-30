@@ -12,7 +12,7 @@ import numpy as np
 import onnxruntime
 from ultralytics import YOLO
 
-with open('./datasets/classes.txt', 'r') as f:
+with open('./classes.txt', 'r') as f:
     classes = [line.strip() for line in f]
 
 rng = np.random.default_rng(114514)
