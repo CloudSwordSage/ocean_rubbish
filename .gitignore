@@ -1,5 +1,10 @@
 data/*
 datasets/*
 datasets_bak/*
-test.ipynb
+*.ipynb
 runs/*
+static/*
+*.pt
+*.onnx
+__pycache__/*
+model/*
